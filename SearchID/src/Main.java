@@ -1,12 +1,14 @@
 /*
  * 
  * Make a parallel stream with IDs
+ * Search ids, Key: The first single digit
  * 
  */
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class Main {
@@ -24,15 +26,29 @@ public class Main {
 		peoplesID.add("1567");
 
 	
-		Stream<String> peopleById=peoplesID.parallelStream();
+		Scanner sc = new Scanner(System.in);
+		String bool=sc.nextLine();
+		//If user doesn't give a signle digit, ask for it
+			if(bool.length() > 1) { 
+				while(bool.length()>1) {
+					System.out.println("Please, Give a signle digit to search");
+				    bool=sc.next();} 
+			} 
 		
-		//Print IDs starting with number 1
-		peopleById
-		        .filter(sameId -> sameId.charAt(0) == '1')
-		        .forEach(sameId -> System.out
-		                        .println("IDs starting with  number <1> : " 
-		                                + sameId));
+		//save a single digit
+		char num= bool.charAt(0);
+		
+		Stream<String> peopleById=peoplesID.parallelStream();
+	
+		//Print IDs starting with number aChar 
+				peopleById
+				        .filter(sameId -> sameId.charAt(0) == num)
+				        .forEach(sameId -> System.out
+				                        .println("IDs starting with  number " + num+ ": "
+				                                + sameId));
 
 	}
 
 }
+
+
